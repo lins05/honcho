@@ -82,8 +82,8 @@ class Popen(subprocess.Popen):
             # MSDN reference:
             #   http://msdn.microsoft.com/en-us/library/windows/desktop/ms684863%28v=vs.85%29.aspx
             create_new_process_group = 0x00000200
-            detached_process = 0x00000008
-            options.update(creationflags=detached_process | create_new_process_group)
+            create_no_console = 0x8000000
+            options.update(creationflags=create_no_console | create_new_process_group)
         elif start_new_session:
             if sys.version_info < (3, 2):
                 options.update(preexec_fn=os.setsid)
